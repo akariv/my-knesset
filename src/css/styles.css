@@ -26,17 +26,20 @@ html,body,#main{
 
 body{
 	background: #000;
+    direction: rtl;
+    color: #00ff00;
 	margin:0;
 	padding:0;
 }
 
+h1 { text-align:center; }
 .hide{
 	display:none !important;
 }
 
 #radar{
 	width:50%;
-	height:100%;
+	height:500px;
 	float:left;
 	position:relative;
 }
@@ -63,3 +66,76 @@ body{
 	left:80px;
 	color:#fff;
 }
+
+#questions {width:48%; float:right;}
+#questions ol {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+li.question:first-child{
+display: block;
+}
+
+li.question{
+    margin:0;
+    padding:0;
+display: none;
+width: 50%;
+position: absolute;
+font-family: Arial;
+text-align: center;
+}
+
+.question h2{
+padding: 20px;
+border: 1px solid green;
+width: 80%;
+margin: 0 auto;
+margin-top: 20px;
+text-align: center;
+font-size: 110%;
+}
+
+.question p{
+padding: 10px;
+width: 80%;
+margin: 0 auto;
+line-height: 120%;
+font-size: 85%;
+text-align: right;
+}
+
+ul#answers{
+    position:a
+margin: auto 0;
+width: 55%;
+margin-top: 50px;
+margin-right: 28%;
+}
+
+ul#answers li{
+text-align: center;
+float: right;
+padding: 13px;
+font-size: 120%;
+border: 1px solid green;
+list-style: none;
+margin: 0px 10px 0px 10px;
+
+}
+
+ul#answers li:hover{
+	background-color: white;
+	color: #000;
+	border: 1px solid #eee;
+	}
+
+ul#answers li:hover a{
+	color: #000;
+	}
+	
+li.button a, li.button a:hover, li.button a:active, li.button a:visited{
+color: #0f0;	
+}	
+

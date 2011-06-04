@@ -184,10 +184,10 @@ var Radar = {
 	 * @param {String} mk - Knesset Member key in this.mks dict
 	 */
 	onTargetOver:function(e,mk){
-		var coords = {left:e.clientX,top:e.clientY};
 		var label = this.mks[mk].name;
 		var el = this.targets[mk].node;
 		var coords = $(el).offset();
+        coords.top -= 81; // TODO: take this from the h1 height
 		this.cursor.show(coords,label);
 	}
 }

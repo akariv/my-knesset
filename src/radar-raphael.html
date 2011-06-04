@@ -9,18 +9,43 @@
 
 <body>
 	<div id="main">
+<h1 id="main_title">אתר את חבר הכנסת שלך
+<a class="logo" href="#" alt="כנסת פתוחה" title="כנסת פתוחה"></a>
+</h1>
 		<div id="radar">
 			<div id="cursor" class="hide">
 				<span id="mk_name">&nbsp;</span>
 			</div>
 		</div>
+    <div id="questions">
+    </div>
+
+<script type="text/mustache" id="questions_template">
+    <ol>
+    {{#questions}}
+        <li class="question" id="question-{{id}}">
+            <h2>{{title}}</h2>
+            <p>{{summary}}</p>
+            <ul id="answers">
+                <li class="button"><a class="for" vote="{{id}}">בעד</a></li>
+                <li class="button"><a class="abstain" vote="{{id}}">נגד</a></li>
+                <li class="button"><a class="against" vote="{{id}}">נמנע</a></li>
+            </ul>
+        </li>
+    {{/questions}}
+    </ol>
+</script>
 	</div>
 	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="js/raphael-min.js"></script>
+	<script type="text/javascript" src="js/mustache.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/votes.js"></script>
 	<script type="text/javascript" src="js/mks.js"></script>
 	<script type="text/javascript" src="js/radar.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+            votes.init();
 			Radar.init(mks);
 		});
 	</script>
