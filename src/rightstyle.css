@@ -32,8 +32,7 @@ text-align: right;
 
 ul#answers{
 margin: auto 0;
-
-width: 50%;
+width: 55%;
 margin-top: 50px;
 margin-right: 28%;
 }
@@ -45,8 +44,21 @@ padding: 13px;
 font-size: 120%;
 border: 1px solid green;
 list-style: none;
-
-
 margin: 0px 10px 0px 10px;
 
 }
+
+ul#answers li:hover{
+	background-color: white;
+	color: #000;
+	border: 1px solid #eee;
+	}
+
+ul#answers li:hover a{
+	color: #000;
+	}
+	
+li.button a, li.button a:hover, li.button a:active, li.button a:visited{
+color: #0f0;	
+}	
+	
