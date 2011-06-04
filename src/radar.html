@@ -35,10 +35,13 @@ var votes = {
             data.id = id;
             votes.votes_data.push(data);
             if (votes.votes_data.length == votes.data.length)
-                var t = $('#questions_template').html();
-            $('#questions').html(Mustache.to_html(t, {questions:votes.votes_data}));
+                votes.render_qs();
         }
         $.get("http://oknesset.org/api/vote/"+vote_id+"/", callback, "jsonp");  
+    },
+    render_qs: function() {
+        var t = $('#questions_template').html();
+        $('#questions').html(Mustache.to_html(t, {questions:votes.votes_data}));
     }
 }
 
@@ -186,9 +189,9 @@ $(rdr.init);
             <h2>{{title}}</h2>
             <p>{{summary}}</p>
             <ul id="answers">
-                <li><a class="button for" vote="{{id}}">בעד</a></li>
-                <li><a class="button abstain" vote="{{id}}">נגד</a></li>
-                <li><a class="button against" vote="{{id}}">נמנע</a></li>
+                <li class="button"><a class="for" vote="{{id}}">בעד</a></li>
+                <li class="button"><a class="abstain" vote="{{id}}">נגד</a></li>
+                <li class="button"><a class="against" vote="{{id}}">נמנע</a></li>
             </ul>
         </li>
     {{/questions}}
