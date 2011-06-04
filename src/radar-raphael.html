@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>My Knesset Radar</title>
+	<meta name="description" content="" />
+	<link rel="stylesheet" media="screen" href="css/styles.css" />
+</head>
+
+<body>
+	<div id="main">
+		<div id="radar">
+			<div id="cursor" class="hide">
+				<span id="mk_name">&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="js/raphael-min.js"></script>
+	<script type="text/javascript" src="js/mks.js"></script>
+	<script type="text/javascript" src="js/radar.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			Radar.init(mks);
+		});
+	</script>
+</body>
+</html>

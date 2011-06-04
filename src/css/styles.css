@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'OronMFMedium';
+    src: url('../fonts/oron-medium-webfont.eot');
+    src: url('../fonts/oron-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/oron-medium-webfont.woff') format('woff'),
+         url('../fonts/oron-medium-webfont.ttf') format('truetype'),
+         url('../fonts/oron-medium-webfont.svg#OronMFBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OronMFBold';
+    src: url('../fonts/oron-bold-webfont.eot');
+    src: url('../fonts/oron-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/oron-bold-webfont.woff') format('woff'),
+         url('../fonts/oron-bold-webfont.ttf') format('truetype'),
+         url('../fonts/oron-bold-webfont.svg#OronMFBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,body,#main{
+	height:100%;
+}
+
+body{
+	background: #000;
+	margin:0;
+	padding:0;
+}
+
+.hide{
+	display:none !important;
+}
+
+#radar{
+	width:50%;
+	height:100%;
+	float:left;
+	position:relative;
+}
+
+#cursor{
+	position: absolute;
+	left:0;
+	top:0;
+	height: 40px;
+	min-width:200px;
+}
+
+#mk_name{
+	font-family: 'OronMFMedium';
+	display: block;
+	height:38px;
+	line-height:38px;
+	padding:0 6px;
+	text-align: center;
+	border:1px solid #00ff00;
+	background-color:rgba(0,205,0,0.6);
+	position: absolute;
+	top:0;
+	left:80px;
+	color:#fff;
+}
