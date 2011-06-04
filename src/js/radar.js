@@ -29,6 +29,7 @@ var Radar = {
 		this.drawGrid();
 		this.drawCircles();
 		this.drawTargets();
+		this.cursor = new Radar.Cursor();
 	},
 	/**
 	 * Updates position of knesset members targets on the radar
@@ -177,7 +178,95 @@ var Radar = {
 	drawBackground:function(){
 		
 	},
-	onTargetOver:function(tgt,mk){
-		console.log(tgt,mk);
+	/**
+	 * Handle Knesset Memeber radar target mouse over
+	 * @param {DOMEvent} e - DOM mouseover event
+	 * @param {String} mk - Knesset Member key in this.mks dict
+	 */
+	onTargetOver:function(e,mk){
+		var coords = {left:e.clientX,top:e.clientY};
+		var label = this.mks[mk].name;
+		var el = this.targets[mk].node;
+		var coords = $(el).offset();
+		this.cursor.show(coords,label);
 	}
+}
+
+Radar.Cursor = function(){
+	this.draw();
+}
+
+Radar.Cursor.prototype = {
+	cx:40,
+	cy:20,
+	dom:{},
+	visible:false,
+	/**
+	 * Draws the cursor
+	 */
+	draw:function(){
+		var cx = this.cx;
+		var cy = this.cy;
+		this.dom.cursor = $('#cursor');
+		this.dom.label = $('#mk_name');
+		var raphael = Raphael(document.getElementById('cursor'),250,40);
+		var c = raphael.circle(this.cx, this.cy, 9);
+		c.attr({'stroke':'rgba(0,255,0,0.5)'});
+		var l = 8 ,r = 12;
+		var points = [
+			[cx + 0, cy + r, cx + 0, cy + r+l],
+			[cx -r, cy +0, cx -r -l, cy + 0],
+			[cx + 0, cy -r, cx + 0, cy -r -l]
+		];
+		var s = Radar.Util.SVGPathFromPoints(points);
+		raphael.path(s).attr({'stroke':'rgba(0,255,0,0.9)'});
+		raphael.path('M'+cx+','+cy+'L80,'+cy).attr({'stroke':'rgba(0,255,0,1.0)'});
+		var center = raphael.circle(cx, cy, 5).attr({'fill':'rgba(0,255,0,0.2)','stroke':'rgba(0,0,0,0)'});
+		$(center.node).mouseout(this.hide.bind(this));
+	},
+	/**
+	 * Show the cursor
+	 * @param {Object} coords - left & top coords for the cursor
+	 * @param {String} label - cursor label
+	 */
+	show:function(coords,label){
+		this.position(coords);
+		this.dom.label.text(label);
+		if(!this.visible){
+			this.dom.cursor.removeClass('hide');
+			this.visible = true;
+		}
+	},
+	/**
+	 * Hides the cursor
+	 */
+	hide:function(){
+		if(this.visible){
+			this.dom.cursor.addClass('hide');
+			this.visible = false;
+		}
+	},
+	/**
+	 * Positions the cursor on the radar
+	 * @param {Object} coords - left and top coords to position
+	 */
+	position:function(coords){
+		coords.left -= (this.cx - 4);
+		coords.top -= (this.cy - 4);
+		this.dom.cursor.css(coords);
+	}
+}
+
+Radar.Util = {
+	SVGPathFromPoints:function(points){
+		var s = [];
+		for (var i in points) {
+			var x1 = points[i][0];
+			var y1 = points[i][1];
+			var x2 = points[i][2];
+			var y2 = points[i][3];
+			s.push('M'+x1+','+y1+'L'+x2+','+y2);
+		}
+		return s.join('');
+	}	
 }
