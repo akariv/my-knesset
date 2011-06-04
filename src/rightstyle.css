@@ -1,0 +1,52 @@
+li.question:first-child{
+visibility: visible;
+display: block;
+width: 50%;
+position: absolute;
+font-family: Arial;
+text-align: center;
+}
+
+li.question{
+visibility: hidden;
+}
+
+.question h2{
+padding: 20px;
+border: 1px solid green;
+width: 80%;
+margin: 0 auto;
+margin-top: 20px;
+text-align: center;
+font-size: 110%;
+}
+
+.question p{
+padding: 10px;
+width: 80%;
+margin: 0 auto;
+line-height: 120%;
+font-size: 85%;
+text-align: right;
+}
+
+ul#answers{
+margin: auto 0;
+
+width: 50%;
+margin-top: 50px;
+margin-right: 28%;
+}
+
+ul#answers li{
+text-align: center;
+float: right;
+padding: 13px;
+font-size: 120%;
+border: 1px solid green;
+list-style: none;
+
+
+margin: 0px 10px 0px 10px;
+
+}
