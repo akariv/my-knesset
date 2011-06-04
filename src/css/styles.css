@@ -1,0 +1,15 @@
+html,body,#main{
+	height:100%;
+}
+
+body{
+	background: #000;
+	margin:0;
+	padding:0;
+}
+
+#radar{
+	width:50%;
+	height:100%;
+	float:left;
+}
