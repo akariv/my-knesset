@@ -19,7 +19,8 @@
 <script type="application/javascript">
 
 var votes = {
-    i: 1,
+    i: 0,
+    user_votes: [],
     votes_data: [],
 
     init: function () {
@@ -42,7 +43,14 @@ var votes = {
     render_qs: function() {
         var t = $('#questions_template').html();
         $('#questions').html(Mustache.to_html(t, {questions:votes.votes_data}));
-    }
+        $('.button').click(function() {
+            votes.user_votes[votes.i]=$(this).children().attr("class");
+            $('#question-'+votes.votes_data[votes.i].id).hide();
+            votes.i++;
+            $('#question-'+votes.votes_data[votes.i].id).show();
+
+        });
+    },
 }
 
 $(votes.init);
@@ -185,7 +193,7 @@ $(rdr.init);
 <script type="text/mustache" id="questions_template">
     <ol>
     {{#questions}}
-        <li class="question" id="#question-{{id}}">
+        <li class="question" id="question-{{id}}">
             <h2>{{title}}</h2>
             <p>{{summary}}</p>
             <ul id="answers">

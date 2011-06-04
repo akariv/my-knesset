@@ -1,14 +1,13 @@
 li.question:first-child{
-visibility: visible;
 display: block;
+}
+
+li.question{
+display: none;
 width: 50%;
 position: absolute;
 font-family: Arial;
 text-align: center;
-}
-
-li.question{
-visibility: hidden;
 }
 
 .question h2{
