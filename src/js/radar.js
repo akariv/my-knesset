@@ -107,7 +107,7 @@ var Radar = {
 			this.lastPartyTheta += 0.4;
 		}
 		if (!this.mkTheta[mk]) {
-			this.partyTheta[o.party] += 0.04;
+			this.partyTheta[o.party] += 0.08;
 			this.mkTheta[mk] = this.partyTheta[o.party];
 		}
 		return this.mkTheta[mk];
