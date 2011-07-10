@@ -39,7 +39,6 @@ h1 { text-align:center; }
 
 #radar{
 	width:50%;
-	height:500px;
 	float:left;
 	position:relative;border-right: 2px solid rgba(0,255,0,0.2);
 }
