@@ -48,6 +48,9 @@
             votes.init();
 			Radar.init(mks);
 		});
+        $(window).resize(function () {
+                Radar.draw();
+                });
 	</script>
 </body>
 </html>

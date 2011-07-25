@@ -23,8 +23,10 @@ var Radar = {
 		this.draw();
 	},
 	draw:function(){
-		this.sizes.w = this.dom.canvas.width();
-		this.sizes.h = this.dom.canvas.height();
+        this.sizes.w = this.dom.canvas.width();
+        this.dom.canvas.height(this.sizes.w);
+        this.sizes.h = this.sizes.w;
+        if (this.radar) this.radar.clear();
 		this.radar = Raphael(document.getElementById('radar'), this.sizes.w, this.sizes.h);
 		this.drawGrid();
 		this.drawCircles();
