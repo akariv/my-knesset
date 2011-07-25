@@ -125,7 +125,7 @@ var Radar = {
 				i++;
 				var o = this.mks[mk];
 				// testing positions - put at 0 (or infinity) later
-				var r = this.radiusFromCorrelation(0);
+				var r = this.radiusFromCorrelation(o);
 				var theta = this.thetaFromMk(mk);
 				var x = Math.round(Math.cos(theta) * r);
 				var y = Math.round(Math.sin(theta) * r);
