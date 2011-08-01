@@ -10,18 +10,9 @@ votes = {
         votes.data = data.v;
         for ( var i = 0 ; i < data.v.length ; i++ ) {
             vote_id = data.v[i];
-            votes.get_vote(vote_id);
+			votes.votes_data.push(votes_data[vote_id]);
         }
-    },
-
-    get_vote: function (id) {
-        function callback(data) {
-            data.id = id;
-            votes.votes_data.push(data);
-            if (votes.votes_data.length == votes.data.length)
-                votes.render_qs();
-        }
-        $.get("http://oknesset.org/api/vote/"+vote_id+"/", callback, "jsonp");  
+		votes.render_qs();
     },
     update_mks: function(user_vote) {
         for (var j=0; j < data.mv.length; j++) {
@@ -31,8 +22,7 @@ votes = {
                 votes.mks_cor[mk_id] = votes.mks_cor[mk_id] + 2 - (mk_vote-user_vote)*(mk_vote-user_vote);
             }
         }
-    },
-	
+    },	
     render_qs: function() {
         var t = $('#questions_template').html();
         $('#questions').html(Mustache.to_html(t, {questions:votes.votes_data}));
