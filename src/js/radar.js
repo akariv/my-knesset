@@ -17,8 +17,9 @@ var Radar = {
 	 * Initialize the radar
 	 * @param {Object} mks - dictionary of Knesset Members
 	 */
-	init:function(mks){
+	init:function(mks,votes){
 		this.mks = mks;
+		this.votes = votes;
 		this.dom.canvas = $('#radar');
 		this.draw();
 	},
@@ -126,8 +127,9 @@ var Radar = {
 			if(this.mks.hasOwnProperty(mk)){
 				i++;
 				var o = this.mks[mk];
-				// testing positions - put at 0 (or infinity) later
-				var r = this.radiusFromCorrelation(o);
+				// get correlation
+				var corr = this.votes.mks_cor[o.id];
+				var r = this.radiusFromCorrelation(corr);
 				var theta = this.thetaFromMk(mk);
 				var x = Math.round(Math.cos(theta) * r);
 				var y = Math.round(Math.sin(theta) * r);
