@@ -101,7 +101,7 @@ var Radar = {
 		}
 	},
 	radiusFromCorrelation:function(corr){
-		return Math.round(corr * (this.sizes.w / 4.1) + this.sizes.w / 4);
+		return Math.round(corr * (this.sizes.w / 4.1) + this.sizes.w / 6);
 	},
 	thetaFromMk:function(mk){
 		var o = this.mks[mk];
@@ -128,7 +128,7 @@ var Radar = {
 				i++;
 				var o = this.mks[mk];
 				// get correlation
-				var corr = this.votes.mks_cor[o.id];
+				var corr = this.votes.mks_cor_normalized[o.id];
 				var r = this.radiusFromCorrelation(corr);
 				var theta = this.thetaFromMk(mk);
 				var x = Math.round(Math.cos(theta) * r);
