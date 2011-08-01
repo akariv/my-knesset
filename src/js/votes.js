@@ -77,8 +77,8 @@ votes = {
             votes.user_votes[votes.i]=vote;
             $('#question-'+votes.votes_data[votes.i].id).hide();
             votes.i++;
-            votes.update_mks(vote)
-			Radar.draw();
+            votes.update_mks(vote);
+			Radar.updateTargets(votes.mks_cor_normalized);
 			$('#question-'+votes.votes_data[votes.i].id).show();
         });
     }

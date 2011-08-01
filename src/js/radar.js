@@ -41,9 +41,10 @@ var Radar = {
 		var cx = Math.round(this.sizes.w / 2);
 		var cy = Math.round(this.sizes.h / 2);
 
-		for(var v in vals){
-			if(vals.hasOwnProperty(v)){
-				var r = vals[v].radius;
+		for(var v in this.mks){
+			if(this.mks.hasOwnProperty(v)){
+				var o = this.mks[v];
+				var r = this.radiusFromCorrelation(vals[o.id]);
 				var t = this.thetaFromMk(v); //vals[v].theta;
 				var x = cx + Math.round(Math.cos(t) * r);
 				var y = cy + Math.round(Math.sin(t) * r);
