@@ -10,6 +10,7 @@ var Radar = {
 	dom:{},
 	sizes:{},
 	targets:{},
+	voteBoxes:{},
 	partyTheta:{},
 	mkTheta:{},
 	lastPartyTheta:0,
@@ -17,30 +18,35 @@ var Radar = {
 	 * Initialize the radar
 	 * @param {Object} mks - dictionary of Knesset Members
 	 */
-	init:function(mks){
+	init:function(mks,votes){
 		this.mks = mks;
+		this.votes = votes;
 		this.dom.canvas = $('#radar');
 		this.draw();
 	},
 	draw:function(){
-		this.sizes.w = this.dom.canvas.width();
-		this.sizes.h = this.dom.canvas.height();
+        this.sizes.w = this.dom.canvas.width();
+        this.dom.canvas.height(this.sizes.w);
+        this.sizes.h = this.sizes.w;
+        if (this.radar) this.radar.clear();
 		this.radar = Raphael(document.getElementById('radar'), this.sizes.w, this.sizes.h);
 		this.drawGrid();
 		this.drawCircles();
 		this.drawTargets();
+		this.drawUserVotes();
 		this.cursor = new Radar.Cursor();
 	},
 	/**
 	 * Updates position of knesset members targets on the radar
 	 */
 	updateTargets:function(vals){
-		var cx = Math.round(this.sizes.w / 2);
-		var cy = Math.round(this.sizes.h / 2);
+		var cx = Math.round(this.sizes.w / 2 + this.sizes.w/12);
+		var cy = Math.round(this.sizes.h / 2 - this.sizes.h/8);
 
-		for(var v in vals){
-			if(vals.hasOwnProperty(v)){
-				var r = vals[v].radius;
+		for(var v in this.mks){
+			if(this.mks.hasOwnProperty(v)){
+				var o = this.mks[v];
+				var r = this.radiusFromCorrelation(vals[o.id]);
 				var t = this.thetaFromMk(v); //vals[v].theta;
 				var x = cx + Math.round(Math.cos(t) * r);
 				var y = cy + Math.round(Math.sin(t) * r);
@@ -60,13 +66,28 @@ var Radar = {
 	updateYAxis:function(){
 		
 	},
+	
+	/**
+	 * Updates Y axis results
+	 */
+	updateUserVoteBox:function(vote,num_vote){
+		var vote_marker='';
+		if (vote==1)
+			vote_marker='+';
+		else if(vote==0)
+			vote_marker='~';
+		else if(vote==-1)
+			vote_marker='-';
+		this.voteBoxes[num_vote].attr('text',vote_marker);
+	},	
+	
 	/** drawing functionality **/
 	
 	/**
 	 * Adds grid to radar canvas
 	 */
 	drawGrid:function(){
-		var n = 20, points = [];
+		var n = 30, points = [];
 		var width = this.sizes.w - 2;
 		var height = this.sizes.h - 1;
 		var dx = Math.round(width / n);
@@ -86,9 +107,9 @@ var Radar = {
 	 * Adds background circles to radar canvas
 	 */
 	drawCircles:function(){
-		var cx = Math.round(this.sizes.w / 2);
-		var cy = Math.round(this.sizes.h / 2);
-		var radii = [cx * 3 / 4 , cx * 2 / 4, cx / 4];
+		var cx = Math.round(this.sizes.w / 2 + this.sizes.w/12);
+		var cy = Math.round(this.sizes.h / 2 - this.sizes.h/8);
+		var radii = [cx * 3 / 6 , cx * 2 / 6, cx / 6];
 		var alphas = [0.25, 0.25, 0.25];
 		for (var i in radii) {
 			var r = Math.round(radii[i]);
@@ -98,7 +119,7 @@ var Radar = {
 		}
 	},
 	radiusFromCorrelation:function(corr){
-		return Math.round(corr * (this.sizes.w / 4.1) + this.sizes.w / 4);
+		return Math.round(corr * (this.sizes.w / 4.1) + this.sizes.w / 6);
 	},
 	thetaFromMk:function(mk){
 		var o = this.mks[mk];
@@ -117,15 +138,16 @@ var Radar = {
 	 */
 	drawTargets:function(){
 		var circle_radius = 4;
-		var cx = Math.round(this.sizes.w / 2);
-		var cy = Math.round(this.sizes.h / 2);
+		var cx = Math.round(this.sizes.w / 2 + this.sizes.w/12);
+		var cy = Math.round(this.sizes.h / 2 - this.sizes.h/8);
 		var i =0;
 		for(var mk in this.mks){
 			if(this.mks.hasOwnProperty(mk)){
 				i++;
 				var o = this.mks[mk];
-				// testing positions - put at 0 (or infinity) later
-				var r = this.radiusFromCorrelation(0);
+				// get correlation
+				var corr = this.votes.mks_cor_normalized[o.id];
+				var r = this.radiusFromCorrelation(corr);
 				var theta = this.thetaFromMk(mk);
 				var x = Math.round(Math.cos(theta) * r);
 				var y = Math.round(Math.sin(theta) * r);
@@ -135,6 +157,42 @@ var Radar = {
 				this.targets[mk] = circle;
 			}
 		}
+	},
+	/**
+	 * Draws user's vote area
+	 */
+	
+	drawUserVotes:function(){
+		var basex = Math.round(this.sizes.w / 2 + this.sizes.w/12)+3;
+		var basey = Math.round(this.sizes.h / 2 + this.sizes.h*2/8)+32;
+		var width = 438	;
+		var height= 22;
+		var left = basex-width/2;
+		var top = basey-height/2;
+		var voteBox = this.radar.rect(left,top,width,height);
+		voteBox.attr({'stroke':'rgba(0,255,0,1)','fill':'rgba(0,0,0,0)'});
+		// create ticks
+		var tickHeight=11;
+		var largeTickPeriod=5;
+		var largeTickHeight=tickHeight*2;
+		var tickBaseX = basex + width/2 - 10;
+		var dx = width/20;
+		var y = top-1;
+		for(var i = 1; i <= 20; i++){
+			var zeroIndex = i-1;
+			var currentX = tickBaseX - zeroIndex*dx;
+			var currentHeight = 0;
+			if (i%largeTickPeriod==0) {
+				currentHeight = largeTickHeight;
+				this.radar.text(currentX,y-largeTickHeight-7,i).attr({'stroke':'rgba(0,255,0,1)','fill':'rgba(0,0,0,0)','font-size':11});
+			} else {
+				currentHeight = tickHeight;
+			}
+			this.radar.path("M"+currentX + " " + y + "l0 -" + currentHeight).attr({'stroke':'rgba(0,255,0,1)','fill':'rgba(0,0,0,0)'});
+			var voteBox = this.radar.text(currentX,y+12,"").attr({'stroke':'rgba(0,255,0,1)','fill':'rgba(0,0,0,0)','font-size':12});
+			this.voteBoxes[zeroIndex]=voteBox;
+		}
+		
 	},
 	testUpdateTargets:function(){
 		var d = new Date().getTime();
