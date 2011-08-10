@@ -6,12 +6,20 @@ import sys
 import random
 
 try:
-    votes_api = json.loads(file('in.json').read())
+    votes_api = json.loads(file('votes.json').read())
 except:
     votes_api = urllib2.urlopen('http://oknesset.org/api/vote/?page_len=10000').read()
-    file('in.json','w').write(votes_api)
+    file('votes.json','w').write(votes_api)
     votes_api = json.loads(votes_api)
 
+try:
+    mk_id_to_slug = json.loads(file('mk_id_to_slug.json').read())
+except:
+    mk_id_to_slug = json.loads(urllib2.urlopen('http://oknesset.org/api/member').read()) 
+    mk_id_to_slug = dict([ (xx['id'], xx['img_url'].split('/')[-1][:-6]) for xx in mk_id_to_slug ])
+    file('mk_id_to_slug.json','w').write(json.dumps(mk_id_to_slug))
+
+    
 not_current_mks = [100,115,697]
 bad_votes = [459, 654, 1734, 517, 428, 426, 367, 327, 164]
 
@@ -152,10 +160,13 @@ for mk in all_mks.keys():
 #mk_cors = list(mks_match.iteritems())
 #mk_cors.sort(key=lambda x:x[1], reverse=True)
 
-print all_votes
+#print all_votes
 #print mk_cors
 
 mi = all_mks.keys()
-mv = [ all_mks[k] for k in mi ]
-mp = [ json.loads(urllib2.urlopen('http://oknesset.org/api/member/%s' % k).read())["votes_per_month"] for k in mi ]
-file('data.js','w').write('var data = %s;' % json.dumps( {'v':all_votes,'mv':mv,'mi':mi,'mp':mp},indent=0))
+mv = [ ( mk_id_to_slug[k], all_mks[k] ) for k in mi ]
+mv = dict(mv)
+
+#mp = [ json.loads(urllib2.urlopen('http://oknesset.org/api/member/%s' % k).read())["votes_per_month"] for k in mi ]
+file('data.js','w').write('var data = %s;' % json.dumps( {'v':all_votes,'mv':mv,'mi':mi} ))
+                                                          #,'mp':mp},indent=0))

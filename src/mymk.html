@@ -4,28 +4,40 @@
 		<style type="text/css">
 			#content {
 				position: absolute;
-				top:10%;
+				top:0%;
 				right:5%;
 				width:90%;
 			}
+			#content2 {
+				position: absolute;
+				top:30%;
+				right:5%;
+				width:90%;
+			}
+
 			.mk, .party {
 				float:right;
 				padding:0px;
 				margin:0px;
 			}
 			.mk {
-				padding-right:15px;
+				width:15px;
+				/*padding-right:15px;*/
 			}
 			.mk div {
+				visibility:hidden;
 				font:bold 14px Helvetica;
-				color:#ccc;
+				color:#eee;
 				white-space:nowrap;
-				display:inline;
 				vertical-align:top;
-				position:relative;
-				top:20px;
+				height:60px;
 			}
-			.mk img {
+			.mk div div {
+				display:inline-block;
+				padding-top:10px;
+				padding-right:5px;
+			}
+			.mk div img {
 				height:60px;
 			}
 			body {
@@ -42,8 +54,8 @@
 		</style>
 	</head>
 	<body>
-		<div id="content">
-		</div>
+		<div id="content"></div>
+		<div id="content2"></div>
 	</body>
 	
 	<script type="text/javascript">
@@ -786,31 +798,31 @@
 									  'danon_danny','elkin_zeev','begin_beni','katz_haim','steinitz_yuval','edelstein_yoel','Peled_Yossi',
 									  'levin_yariv','katz_yisrael','Shama_Carmel','nass_lea','livnat_limor','eitan_michael','regev_miri',
 									  'yaalon_moshe','cahlon_moshe','shalom_silvan','Pinyan_Zion','Hotovely_Tzipi','rivlin_rubi'] },
-		 'israel_beytenu':  {"seats": 15, "is_coalition": true, "name": "\u05d9\u05e9\u05e8\u05d0\u05dc \u05d1\u05d9\u05ea\u05e0\u05d5", "color" : [20,20,185], 
+		 'israel_beytenu':  {"seats": 15, "is_coalition": true, "name": "\u05d9\u05e9\u05e8\u05d0\u05dc \u05d1\u05d9\u05ea\u05e0\u05d5", "color" : [20,135,185], 
 		 					 "mks" : ['liberman_avigdor','Levy_Orli','Miller_Alex','Michaeli_Anastassia','David_Rotem','Ayalon_Daniel',
 						       		  'Amar_Hamad','aharonovitch_yitzhak','shemtov_lia','matalon_moshe_mutz','landver_sofa',
 						       		  'miznikov_stas','landau_uzi','Kirshenbaum_Faina','ilatov_robert'] },
 		 'shas': 			{"seats": 11, "is_coalition": true, "name": "\u05e9\"\u05e1", "color" : [80,20,80],
 							 "mks" : ['michaeli_avraham','yishai_eli','cohen_amnon','atias_ariel','azoulay_david',
 									  'amsalem_haim','margi_yaakov','vaknin_yizhak','cohen_yitzhak','nahari_meshulam','zeev_nissim'] },
-		 'haavoda': 		{"seats": 8, "is_coalition": false, "name": "\u05d4\u05e2\u05d1\u05d5\u05d3\u05d4", "color" : [135,20,20], 
+		 'haavoda': 		{"seats": 8, "is_coalition": false, "name": "\u05d4\u05e2\u05d1\u05d5\u05d3\u05d4", "color" : [185,20,20], 
 		 					 "mks" : ['braverman_avishay', 'cabel_eitan', 'beneliezer_binyamin', 'Ben_Simon_Daniel', 'herzog_yitzhak',
 		             				  'peretz_amir','majadele_ralev','yacimovich_shelly'] },
 	     'haatzmaut': 		{"seats": 5, "is_coalition": true, "name": "\u05d4\u05e2\u05e6\u05de\u05d0\u05d5\u05ea", "color" : [135,20,135], 
    		  					 "mks" : ['barak_ehud', 'noked_orit', 'vilnai_matan', 'Einat_Wilf', 'simhon_shalom'] },
 		 'yehadut_hatora': 	{"seats": 5, "is_coalition": true, "name": "\u05d9\u05d4\u05d3\u05d5\u05ea \u05d4\u05ea\u05d5\u05e8\u05d4", "color" : [20,20,20],
 		 					 "mks" : ['uri_maklev','lizman_yaakov','eichler_israel','moses_menachem','gafni_moshe'] }, 
-		 'haichud_haleumi': {"seats": 4, "is_coalition": false, "name": "\u05d4\u05d0\u05d9\u05d7\u05d5\u05d3 \u05d4\u05dc\u05d0\u05d5\u05de\u05d9", "color" : [235,135,135],
+		 'haichud_haleumi': {"seats": 4, "is_coalition": false, "name": "\u05d4\u05d0\u05d9\u05d7\u05d5\u05d3 \u05d4\u05dc\u05d0\u05d5\u05de\u05d9", "color" : [235,155,20],
 		 					 "mks" : ['ariel_uri-yehuda', 'eldad_aryeh', 'Yaakov_Katzeleh_Katz', 'Ben_Ari_Michael'] },
-		 'hadash': 			{"seats": 4, "is_coalition": false, "name": "\u05d7\u05d3\"\u05e9", "color" : [235,20,20],
+		 'hadash': 			{"seats": 4, "is_coalition": false, "name": "\u05d7\u05d3\"\u05e9", "color" : [235,50,50],
 		 					 "mks" : ['khenin_dov', 'swaid_hana', 'baraka_mohamed', 'Agbaria_Afou'] },
-		 'raam_taal': 		{"seats": 4, "is_coalition": false, "name": "\u05e8\u05e2\"\u05dd-\u05ea\u05e2\"\u05dc", "color" : [40,135,40],
+		 'raam_taal': 		{"seats": 4, "is_coalition": false, "name": "\u05e8\u05e2\"\u05dd-\u05ea\u05e2\"\u05dc", "color" : [75,85,135],
 		 					 "mks" : ['sarsur_ibrahim', 'tibi_ahmed', 'elsana_taleb', 'Ganaim_Masud'] },
 		 'meretz': 			{"seats": 3, "is_coalition": false, "name": "\u05de\u05e8\u05e6", "color" : [ 20,185, 20 ],
 		 					 "mks" : ['gilon_ilan', 'oron_chaim', 'Horowitz_Nitzan'] },
-		 'habait_hayehudi': {"seats": 3, "is_coalition": true, "name": "\u05d4\u05d1\u05d9\u05ea \u05d4\u05d9\u05d4\u05d5\u05d3\u05d9", "color" : [135, 80, 80],
+		 'habait_hayehudi': {"seats": 3, "is_coalition": true, "name": "\u05d4\u05d1\u05d9\u05ea \u05d4\u05d9\u05d4\u05d5\u05d3\u05d9", "color" : [235, 185, 20],
 		 					 "mks" :['Orbach_Uri', 'Hershkowitz_Daniel', 'orlev_zevulun'] },
-		 'balad': 			{"seats": 3, "is_coalition": false, "name": "\u05d1\u05dc\"\u05d3", "color" : [ 20, 135, 20] , 
+		 'balad': 			{"seats": 3, "is_coalition": false, "name": "\u05d1\u05dc\"\u05d3", "color" : [185, 85, 20], 
 							 "mks" : ['zahalka_jamal', 'Zuabi_Hanin', 'naffa_said'] }
 	};
 
@@ -821,22 +833,49 @@
 	} 
 
 	function new_block(name,img,color_base) {
-		$("#content").append("<div class='mk'><img src='"+img+"'/><div class='mk-div'>"+name+"</div></div>");
+		$("#content").append("<div class='mk'><div><img src='"+img+"'/><div class='mk-div'>"+name+"</div></div></div>");
 		var mydiv = $("div.mk:last");
+		var mydivscontent = $("div.mk:last div");
 		var r = random();
 		mydiv.css("background-color","rgb("+(color_base[0]+r)+","+(color_base[1]+r)+","+(color_base[2]+r)+")");
 		mydiv.css("overflow","hidden");
-		mydiv.width("0px");
+		mydiv.width("15px");
 		mydiv.height("60px");
-		mydiv.hover( function() { mydiv.animate({width:200},100, "linear"); },
-			 	 	 function() { mydiv.clearQueue();
-			 	 	 			  mydiv.animate({width:0},100, "linear"); }
+		mydiv.hover( function() { mydivscontent.css("visibility","visible");
+								  mydiv.animate({width:200},100, "linear" );
+		  						  mydivscontent.animate({opacity:1,visibility:"visible"},100, "linear" ); },
+			 	 	 function() { mydivscontent.css("visibility","hidden");													
+								  mydiv.clearQueue();
+			 	 	 			  mydivscontent.animate({opacity:0,visibilty:"hidden"},100, "linear"); 
+			 	 	 			  mydiv.animate({width:15},100, "linear"); }
 				);
 /*		mydiv.hover( function() { mydiv.width(200); },
 			 	 function() { mydiv.width(15); }
 				);*/
 	}
 
+	function weighted_block(name,img,color_base,weight,party_name) {
+		$("#content2").append("<div class='mk'><div><img src='"+img+"'/><div>"+name+"<br/><span style='font-size:80%'>"+party_name+"</span></div></div></div>");
+		var mydiv = $("#content2 div.mk:last");
+		var mydivscontent = $("div.mk:last div");
+		var r = random();
+		mydiv.css("background-color","rgb("+(color_base[0]+r)+","+(color_base[1]+r)+","+(color_base[2]+r)+")");
+		mydiv.css("overflow","hidden");
+		mydiv.width(5+weight);
+		mydiv.height("60px");
+		mydiv.hover( function() { mydivscontent.css("visibility","visible");
+								  mydiv.animate({width:200},100, "linear" );
+		  						  mydivscontent.animate({opacity:1,visibility:"visible"},100, "linear" ); },
+			 	 	 function() { mydivscontent.css("visibility","hidden");													
+								  mydiv.clearQueue();
+			 	 	 			  mydivscontent.animate({opacity:0,visibilty:"hidden"},100, "linear"); 
+			 	 	 			  mydiv.animate({width:5+weight},100, "linear"); }
+				);
+/*		mydiv.hover( function() { mydiv.width(200); },
+			 	 function() { mydiv.width(15); }
+				);*/
+	}
+	
 	function party_block(name,color_base) {
 		$("#content").append("<div class='party'><div>"+name+"</div></div>");
 		var mydiv = $("div.party:last");
@@ -863,6 +902,23 @@ $( function() {
 			s=0;
 		} 
 	}
+
+	s=0;
+	var weight = 12.0;
+	for ( var i in mks ) {
+		var mk = mks[i];
+		var party = parties[mk.party];
+		var color_base = party.color;
+		var seats = party.seats;
+		if ( (s + (weight*weight) + 5) > 900 ) {
+			$("#content2").append("<div style='clear:both;height:0px;'></div>");
+			s=0;
+		} 
+		weighted_block( mk.name, mk.img, color_base, (weight*weight), party.name ); 
+		s += (weight*weight) + 5;
+		weight -= 0.2;
+	}
+	
 } );
 
 	
